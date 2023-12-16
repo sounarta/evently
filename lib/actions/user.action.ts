@@ -13,7 +13,7 @@ import Order from "@/database/order.model";
 
 export async function createUser(DataUser: DataUserParams) {
   try {
-    ConnectToDatabase();
+   await  ConnectToDatabase();
     const newUser = await User.create(DataUser);
     return newUser;
   } catch (error) {
@@ -24,7 +24,7 @@ export async function createUser(DataUser: DataUserParams) {
 
 export async function updateUser(params: updateUserParams) {
   try {
-    ConnectToDatabase();
+    await ConnectToDatabase();
     const { clerkId, updateData, path } = params;
 
     await User.findOneAndUpdate({ clerkId }, updateData, { new: true });
@@ -37,7 +37,7 @@ export async function updateUser(params: updateUserParams) {
 
 export async function deleteUser(params: deleteUserParams) {
   try {
-    ConnectToDatabase();
+    await ConnectToDatabase();
     const { clerkId } = params;
 
     const user = await User.findOneAndDelete({ clerkId });
