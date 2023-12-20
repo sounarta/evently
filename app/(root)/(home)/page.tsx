@@ -6,11 +6,11 @@ import { getAllEvents } from "@/lib/actions/event.actions";
 import CardEvent from "@/components/CardEvent";
 import Search from "@/components/Search";
 interface Props {
-  searchParams:{[key:string]:string | undefined}
+  searchParams: { [key: string]: string  | undefined }
 }
 const Home = async ({searchParams}:Props) => {
   const result = await getAllEvents({
-    searchQuery: searchParams.q
+  //  searchQuery: searchParams.q 
 
   });
 

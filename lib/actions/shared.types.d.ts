@@ -79,7 +79,7 @@ export interface checkoutOrderParams {
  }
 
  export interface GetAllEventsParams {
-    searchQuery:string
+    searchQuery?:string
  }
 
  export interface  createOrderParams {
