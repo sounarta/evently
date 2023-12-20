@@ -1,46 +1,31 @@
-"use client";
+'use client';
 
-import { headerLinks } from "@/constants";
-import { useAuth } from "@clerk/nextjs";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import React from "react";
+import { headerLinks } from '@/constants'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import React from 'react'
 
 const NavItems = () => {
   const pathname = usePathname();
 
-  const userId = useAuth();
-
   return (
-    <ul className="flex w-full flex-col  items-center gap-10 max-sm:items-start lg:flex-row">
-      {headerLinks.map((item) => {
-        const isActive =
-          (pathname.includes(item.route) && item.route.length > 0) ||
-          pathname === item.route;
-
-        if (item.route === "profile") {
-          if (userId) {
-            item.route = `${item.route}/${userId}`;
-          } else {
-            return null;
-          }
-        }
-
+    <ul className="md:flex-between flex w-full flex-col items-start gap-5 md:flex-row">
+      {headerLinks.map((link) => {
+        const isActive = pathname === link.route;
+        
         return (
           <li
-            key={item.route}
-            className={` cursor-pointer ${
-              isActive
-                ? " rounded-lg px-3 py-1 font-semibold text-blue-500 max-sm:w-full "
-                : ""
-            }`}
+            key={link.route}
+            className={`${
+              isActive && 'text-primary-500'
+            } flex-center p-medium-16 whitespace-nowrap`}
           >
-            <Link href={item.route}>{item.label}</Link>
+            <Link href={link.route}>{link.label}</Link>
           </li>
-        );
+        )
       })}
     </ul>
-  );
-};
+  )
+}
 
-export default NavItems;
+export default NavItems

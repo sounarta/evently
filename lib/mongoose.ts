@@ -5,10 +5,13 @@ let isConnected: boolean = false;
 export async function ConnectToDatabase() {
   mongoose.set("strictQuery", true);
 
-  if (!process.env.MONGODB_URL) return console.log("MONGODB URL is MISSING");
+  if (!process.env.MONGODB_URL) {
+    throw new Error("MONGODB URL is MISSING");
+  }
 
-  if (isConnected){
-    return console.log("MongoDb already Connected");
+  if (isConnected) {
+    console.log("MongoDb already Connected");
+    return;
   }
 
   try {
@@ -18,8 +21,8 @@ export async function ConnectToDatabase() {
 
     isConnected = true;
 
-    return console.log("MONGODB Connected");
+    console.log("MONGODB Connected");
   } catch (error) {
-    console.log("MONGODB failed", error);
+    console.error("MONGODB failed", error);
   }
 }
